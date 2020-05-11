@@ -1,0 +1,49 @@
+Commit #1
+
+What is included. 
+
+In the first commit i have set up the POM.xml file all dependancies are listed as well as plugings 
+
+Class Usere is used to store user data, Constructors are listed as well as get methods 
+
+Class TestUsers is testing the constructors and using the get methods. 
+
+To Do: 
+
+Error handeling on each imput something like this 
+
+
+// This is in user Class
+
+public User(String name, String surname)  {
+
+ if (name.length() >= 5  && name.length() <= 22)
+        {
+            this.name = name;
+        }
+            else
+                {
+            throw new IllegalArgumentException("Name invalid - must be 5-22 charaters");
+            }
+        
+    }
+	
+	if (surname.length() >= 5  && name.length() <= 22)
+        {
+            this.surname = surname;
+        }
+            else
+                {
+            throw new IllegalArgumentException("Surname invalid - must be 5-22 charaters");
+            }
+        
+    }
+	
+	
+	// This is in Testuser Class
+	
+	{
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> new User("Stephen","Kilgannon","0871111111","17 Belmont","DublinRd","Galway","28/12/94","h91efh");
+       // assertEquals("Name invalid - must be 5-22 charaters", exception.getMessage())
+        System.out.println("testName(): " + exception);
+    }
