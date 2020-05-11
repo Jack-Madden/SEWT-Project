@@ -6,7 +6,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.File;
 
-public class addTransaction extends ApplicationGUI implements ActionListener {
+public class addTransaction implements ActionListener {
 
 
 
