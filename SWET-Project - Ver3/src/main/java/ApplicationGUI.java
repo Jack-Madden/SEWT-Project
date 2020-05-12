@@ -17,7 +17,8 @@ public class ApplicationGUI {
         initialise();
     }   // Calculator()
 
-    public void initialise(){
+    public void initialise()
+    {
         // Create frame
         frame = new JFrame();
         frame.setVisible(true);
@@ -37,6 +38,5 @@ public class ApplicationGUI {
 
 
     } // initialise()
-
 
 }

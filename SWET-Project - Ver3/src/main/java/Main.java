@@ -3,7 +3,8 @@
 
 public class Main implements Runnable{
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         ApplicationGUI window = new ApplicationGUI();
 
     }

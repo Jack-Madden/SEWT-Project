@@ -7,10 +7,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-public class expenseLog implements ActionListener {
-    public void expenseLog(){
-
-
+public class expenseLog implements ActionListener
+{
+    public void expenseLog()
+    {
         try {
 
             // Stores the separate lines in a List than to a 2d List

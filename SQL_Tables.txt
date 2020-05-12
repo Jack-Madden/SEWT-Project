@@ -1,0 +1,64 @@
+****This file contains the code to create the tables for the application, steps below****
+
+1. Using HeidiSQL or another database interface tool, create a database named "userdatabase".
+2. Make sure you have that database selected and 1 by 1 paste the code for each table 
+   below in the terminal on the bottom.
+3. Make sure you have went into project structure -> libraries and give the path to jdbc connector driver
+   to include the classes needed to call the SQL methods.
+4. Change the databaseURL, databaseUser, and databasePassword to match that of the SQL database you created.
+
+useraddresses table:
+CREATE TABLE `useraddresses` (
+	`addressID` INT(11) NOT NULL AUTO_INCREMENT,
+	`userID` INT(11) NOT NULL,
+	`address1` VARCHAR(50) NULL DEFAULT NULL,
+	`address2` VARCHAR(50) NULL DEFAULT NULL,
+	`city` VARCHAR(50) NULL DEFAULT NULL,
+	`eircode` VARCHAR(50) NULL DEFAULT NULL,
+	PRIMARY KEY (`addressID`),
+	INDEX `userID` (`userID`),
+	CONSTRAINT `fk_addresses` FOREIGN KEY (`userID`) REFERENCES `usernames` (`userID`)
+)
+COLLATE='utf8mb4_0900_ai_ci'
+ENGINE=InnoDB
+;
+****************************************
+usernames table:
+
+CREATE TABLE `usernames` (
+	`userID` INT(11) NOT NULL AUTO_INCREMENT,
+	`firstName` VARCHAR(50) NOT NULL,
+	`lastName` VARCHAR(50) NOT NULL,
+	PRIMARY KEY (`userID`)
+)
+COLLATE='utf8mb4_0900_ai_ci'
+ENGINE=InnoDB
+;
+****************************************
+usernumbers table:
+
+CREATE TABLE `usernumbers` (
+	`numberID` INT(11) NOT NULL AUTO_INCREMENT,
+	`userID` INT(11) NOT NULL,
+	`number` VARCHAR(50) NULL DEFAULT NULL,
+	PRIMARY KEY (`numberID`),
+	INDEX `userID` (`userID`),
+	CONSTRAINT `fk_usernumbers` FOREIGN KEY (`userID`) REFERENCES `usernames` (`userID`)
+)
+COLLATE='utf8mb4_0900_ai_ci'
+ENGINE=InnoDB
+;
+******************************************
+userpasswords table:
+
+CREATE TABLE `userpasswords` (
+	`passwordID` INT(11) NOT NULL AUTO_INCREMENT,
+	`userID` INT(11) NOT NULL,
+	`password` VARCHAR(50) NOT NULL,
+	PRIMARY KEY (`passwordID`),
+	INDEX `userID` (`userID`),
+	CONSTRAINT `fk_passwords` FOREIGN KEY (`userID`) REFERENCES `usernames` (`userID`)
+)
+COLLATE='utf8mb4_0900_ai_ci'
+ENGINE=InnoDB
+;
