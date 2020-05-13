@@ -8,8 +8,13 @@ import java.io.*;
 
 public class addTransaction implements ActionListener {
 
-    public void addTransaction() {
-        JFrame incomeF = new JFrame("Add Transaction");
+    JFrame frame;
+
+    public void addTransaction( ) {
+        // Frame created
+        JFrame transFrame = new JFrame();
+
+        // Submit button and dropdown menu
         JButton submit = new JButton("Submit");
         String[] transactionType = {"Income", "Expense"};
 
@@ -18,8 +23,8 @@ public class addTransaction implements ActionListener {
         JLabel dropLabel = new JLabel();
         transactionList.setSelectedIndex(1);
         transactionList.setBounds(60, 150, 100, 30);
-        incomeF.add(transactionList);
-        incomeF.add(dropLabel);
+        transFrame.add(transactionList);
+        transFrame.add(dropLabel);
 
         // Description Textbox label
         JLabel nameLabel = new JLabel();
@@ -30,8 +35,8 @@ public class addTransaction implements ActionListener {
         desTextBoxLabel.setBounds(5, 110, 200, 100);
         JTextField desTextfield= new JTextField();
         desTextfield.setBounds(110, 50, 130, 30);
-        // Income amount
 
+        // Income amount
         JLabel amountLabel = new JLabel();
         amountLabel.setText(" Amount :");
         amountLabel.setBounds(5, 80, 100, 100);
@@ -41,92 +46,95 @@ public class addTransaction implements ActionListener {
         JTextField amntTextfield= new JTextField();
         amntTextfield.setBounds(110, 120, 130, 30);
 
-        // Amount
         amntTextfield.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
                 super.keyTyped(e);
                 char input = e.getKeyChar();
-
+                // UI Error
                 JLabel numError = new JLabel("");
                 numError.setForeground(Color.RED);
-                numError.setBounds(30,50, 111, 111);
-
+                numError.setBounds(110, 60, 200, 100);
+                numError.setVisible(true);
+                transFrame.add(numError);
+                // Ensures only numbers are typed
                 if((Character.isLetter(input) && !e.isAltDown())){
                     e.consume();
                     System.out.println("Invalid character");
-                    numError.setText("Invalid character");  // fix this to print under box
+                    numError.setText("Numbers only!");
                 }
             }
         });
 
-        // Submit button
-        submit.setBounds(100,200,140, 40);
-
         // Add description to frame
-        incomeF.add(desTextBoxLabel);
-        incomeF.add(desTextfield);
-        incomeF.add(nameLabel);
+        transFrame.add(desTextBoxLabel);
+        transFrame.add(desTextfield);
+        transFrame.add(nameLabel);
         // Add amount to frame
-        incomeF.add(amntTextBoxLabel);
-        incomeF.add(amntTextfield);
-        incomeF.add(amountLabel);
-
-        incomeF.add(submit);
-        incomeF.setSize(300,300);
-        incomeF.setLayout(null);
-        incomeF.setVisible(true);
-        incomeF.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        transFrame.add(amntTextBoxLabel);
+        transFrame.add(amntTextfield);
+        transFrame.add(amountLabel);
+        // Add submit to frame
+        submit.setBounds(100,200,140, 40);
+        transFrame.add(submit);
+        // Frame characteristics
+        transFrame.setSize(300,300);
+        transFrame.setLayout(null);
+        transFrame.setVisible(true);
+        transFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Action listener
         submit.addActionListener(new ActionListener() {
-            @Override
+            @Override   // When submit button is pressed
             public void actionPerformed(ActionEvent arg0) {
                 String description = "";
                 String amount = "";
                 String operator = "";
-
-
+                // Input converted to String
                 description = amntTextfield.getText();
                 amount = desTextfield.getText();
                 operator = (String)transactionList.getSelectedItem();
 
-                System.out.println("operator is" + operator);
-
                 System.out.println("Description: " + desTextfield.getText());
                 System.out.println("Amount: " + amntTextfield.getText());
                 System.out.println("Selected operator is " + operator);
-
+                // Operator converted to symbol
                 String savedOperator = null;
                 if (operator == "Income"){
-                    savedOperator = operator;
+                    savedOperator = "+";
                 }
                 else if (operator == "Expense"){
-                    savedOperator = operator;
-                    
+                    savedOperator = "-";
                 }
-                try {
+                try {   // Write new transaction to Transactions.txt
                     FileWriter writer = new FileWriter("Transactions.txt", true);
                     BufferedWriter bw = new BufferedWriter(writer);
                     PrintWriter out = new PrintWriter(bw);
-                    out.append("\n" +amount + " "   +savedOperator +description);
-                    out.close();
+
+                    // Checks if string is empty
+                    String s = ("\n" +amount  + ", "  +savedOperator  +description);
+                    System.out.println("Size of amount string is " +s.length());
+                    if(s.length()>4){
+                        out.append("\n" +amount  + ", "  +savedOperator  +description);
+                        out.close();
+                    }
+                    else{
+                        System.out.println("String is <4");
+                    }
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
-
-
-
-                incomeF.dispose();
-            }
-        });
-
-
+                transFrame.dispose();  // close frame
+            }   // actionPerformed
+        }); // ActionListener
     } // addTransaction()
-
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        addTransaction();
-    }
-}
+
+
+                addTransaction();
+
+
+    }   // actionPerformed(ActionEvent e)
+}   // addTransaction class
