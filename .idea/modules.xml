@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/SEWTProject_CJ_JM_SF_SK.iml" filepath="$PROJECT_DIR$/.idea/SEWTProject_CJ_JM_SF_SK.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SWET-Project.iml" filepath="$PROJECT_DIR$/SWET-Project.iml" />
     </modules>
   </component>
 </project>
